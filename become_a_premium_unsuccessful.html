@@ -1,0 +1,47 @@
+<html>
+	<head>
+		<style>
+		body {
+					background: url(slika.jpg), url(bar.jpg);
+					background-repeat: no-repeat, no-repeat;
+					background-size: 100% 100%, 100% 180px;
+					background-position:0px 181px , 0px 0px;
+					background-repeat: no-repeat, no-repeat;
+					
+				}
+		div {
+		  
+		  padding-top: 10px;
+		  padding-bottom: 15px;
+		  padding-left: 60px;
+			}
+		.topcorner{
+			position:absolute;
+			top:10px;
+			right: 10px;
+			color:red
+		}
+	</style>
+		<title>Become premium</title>
+	</head>
+	<body>
+	<b>
+		<div class="topcorner">Username123</div>
+		<h1 align="center">Become a premium member!</h1><br><br><br><br><br><br><br>
+		By becoming a premium member, you increase your chances of being contacted as your published drives will be present on top od the search list!<br><br>
+		However, this kind of transaction is only possible for Serbian citizens.<br><br>
+		This is how your payment should look like:<br>
+		<img src="Uplatnica.png" border="5"><br><br>
+		Submit a picture of your payment and you will soon be accepted as a premium member.<br>
+		<form action="upload.php" method="post" enctype="multipart/form-data">
+			Select image to upload:
+			<input type="file" name="fileToUpload" id="fileToUpload">
+			<input type="submit" value="Upload Image" name="submit"><br><br>
+			<button type = "button">Submit</button>
+			<a href = "my_profile.html"><button type = "button">Back</button></a>
+			</form>
+		<br>
+	</b>
+		<p><font color="red">Application is already sent!</font></p>
+	</body>
+</html>
