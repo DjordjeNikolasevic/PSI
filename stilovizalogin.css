@@ -53,6 +53,26 @@
 	 opacity: 0.6
 	 }
 	 
+.button3 {
+				background-color: #E0115F;
+				border: none;
+				color: white;
+				text-align: center;
+				text-decoration: none;
+				display: inline-block;
+				border-radius: 15px;
+				font-size: 16px;
+				display: block;
+				width:100px;
+				padding: 14px 10px;
+				cursor: pointer;
+				opacity: 1;
+				transition: 0.3s;
+ }
+  .button3:hover {
+	 opacity: 0.6
+	 }
+	 
 	 
 .top-right {
   position: absolute;
