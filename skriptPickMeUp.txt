@@ -1,0 +1,126 @@
+
+CREATE TABLE Appliance
+(
+	IdUser               INTEGER NOT NULL,
+	IdRide               INTEGER NOT NULL,
+	Accepted             boolean NULL,
+	CONSTRAINT XPKAppliance PRIMARY KEY (IdUser,IdRide)
+);
+
+CREATE UNIQUE INDEX XPKAppliance ON Appliance
+(
+	IdUser ASC,
+	IdRide ASC
+);
+
+CREATE TABLE Participant
+(
+	IdUser               INTEGER NOT NULL,
+	IdRide               INTEGER NOT NULL,
+	RideComment          TEXT NULL,
+	Rate                 INTEGER NULL,
+	IdParticipant        INTEGER NOT NULL,
+	CONSTRAINT XPKParticipant PRIMARY KEY (IdParticipant)
+);
+
+CREATE UNIQUE INDEX XPKParticipant ON Participant
+(
+	IdParticipant ASC
+);
+
+CREATE TABLE PremiumRequest
+(
+	IdUser               INTEGER NOT NULL,
+	Payment              VARCHAR(40) NULL,
+	CONSTRAINT XPKPremiumRequest PRIMARY KEY (IdUser)
+);
+
+CREATE UNIQUE INDEX XPKPremiumRequest ON PremiumRequest
+(
+	IdUser ASC
+);
+
+CREATE TABLE Report
+(
+	IdReporter           INTEGER NOT NULL,
+	IdParticipant        INTEGER NOT NULL,
+	IdReport             INTEGER NOT NULL,
+	CONSTRAINT XPKReport PRIMARY KEY (IdReport)
+);
+
+CREATE UNIQUE INDEX XPKReport ON Report
+(
+	IdReport ASC
+);
+
+CREATE TABLE Ride
+(
+	IdRide               INTEGER NOT NULL AUTO_INCREMENT,
+	IsActive             boolean NOT NULL,
+	IdOwner              INTEGER NOT NULL,
+	StartDate            DATE NULL,
+	StartPoint           VARCHAR(20) NULL,
+	EndPoint             VARCHAR(20) NULL,
+	FreeSeats            INTEGER NULL,
+	Cost                 INTEGER NULL,
+	CarType              VARCHAR(20) NULL,
+	Contact              VARCHAR(15) NULL,
+	CONSTRAINT XPKRide PRIMARY KEY (IdRide)
+);
+
+CREATE UNIQUE INDEX XPKRide ON Ride
+(
+	IdRide ASC
+);
+
+CREATE TABLE User
+(
+	IdUser               INTEGER NOT NULL AUTO_INCREMENT,
+	Name                 VARCHAR(10) NULL,
+	Surname              VARCHAR(20) NOT NULL,
+	UserName             VARCHAR(20) NOT NULL,
+	Password             CHAR(64) NULL,
+	DateOfBirth          DATE NOT NULL,
+	Status               CHAR NOT NULL CHECK ( Status IN ('A', 'R', 'P', 'W') ),
+	IsBanned             boolean NULL,
+	Image                VARCHAR(30) NULL,
+	Email                VARCHAR(20) NULL,
+	CONSTRAINT XPKUser PRIMARY KEY (IdUser)
+);
+
+CREATE UNIQUE INDEX XPKUser ON User
+(
+	IdUser ASC
+);
+
+ALTER TABLE Appliance
+ADD CONSTRAINT R_6 FOREIGN KEY (IdUser) REFERENCES User (IdUser)
+		ON DELETE CASCADE;
+
+ALTER TABLE Appliance
+ADD CONSTRAINT R_7 FOREIGN KEY (IdRide) REFERENCES Ride (IdRide)
+		ON DELETE CASCADE;
+
+ALTER TABLE Participant
+ADD CONSTRAINT R_3 FOREIGN KEY (IdRide) REFERENCES Ride (IdRide)
+		ON DELETE CASCADE;
+
+ALTER TABLE Participant
+ADD CONSTRAINT R_2 FOREIGN KEY (IdUser) REFERENCES User (IdUser)
+		ON DELETE CASCADE;
+
+ALTER TABLE PremiumRequest
+ADD CONSTRAINT R_11 FOREIGN KEY (IdUser) REFERENCES User (IdUser)
+		ON DELETE CASCADE;
+
+ALTER TABLE Report
+ADD CONSTRAINT R_4 FOREIGN KEY (IdReporter) REFERENCES User (IdUser)
+		ON DELETE CASCADE;
+
+ALTER TABLE Report
+ADD CONSTRAINT R_5 FOREIGN KEY (IdParticipant) REFERENCES Participant (IdParticipant)
+		ON DELETE CASCADE;
+
+ALTER TABLE Ride
+ADD CONSTRAINT R_1 FOREIGN KEY (IdOwner) REFERENCES User (IdUser)
+		ON DELETE CASCADE;
